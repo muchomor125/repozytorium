@@ -10,7 +10,7 @@ public class Connect {
  
    static Scanner in = new Scanner( System.in);
   
-   public static void main(String[] args) {
+     public static void main(String[] args) {
    Connection conn = null;
    Statement stmt = null;
    try{
@@ -31,7 +31,7 @@ public class Connect {
       String city;
       do
       {
-         System.out.println("1. Select *\n2. Insert\n3. Edit\nS. Press S to Exit");
+         System.out.println("1. Select *\n2. Insert\n3. Edit\n4. Delete\nS. Press S to Exit");
          optNr = in.nextLine();
          switch( optNr )
          {
@@ -105,7 +105,29 @@ rss.close();
                         sql = " UPDATE Persons SET LastName = '"+last+"' , FirstName = '"+first+"', Address = '"+address+"',City ='"+city+"' WHERE PersonID= '"+idr+"';";
                         System.out.println("sql:"+sql);
                         int rii = stmt.executeUpdate(sql);
-                     break;                                      
+                     break;
+case "4" : 
+                       sql = "SELECT PersonID, FirstName, LastName, Address, City FROM Persons";
+                       ResultSet rsss = stmt.executeQuery(sql);
+                                           System.out.println("ID    First    Last    Address    City");
+ 
+                       while(rsss.next()){
+                          id  = rsss.getInt("PersonID");
+                          first = rsss.getString("FirstName");
+                          last = rsss.getString("LastName");
+                          address = rsss.getString("Address");
+                          city = rsss.getString("City");
+ 
+                          System.out.println(id+"    "+first+"    "+last+"    "+address+"    "+city);
+ 
+                       }
+                       rsss.close();
+                        System.out.println("Enter ID to delete");
+                          idr = in.nextLine();
+                        sql = " DELETE FROM Persons WHERE PersonID= '"+idr+"';";
+                        System.out.println("sql:"+sql);
+                        int riii = stmt.executeUpdate(sql);
+                     break;                                       
          }
        }while (!optNr.equals("S"));       
       stmt.close();
