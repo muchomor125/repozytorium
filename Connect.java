@@ -1,27 +1,29 @@
 import java.sql.*;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
  
 public class Connect {
    static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-   static final String DB_URL = "jdbc:mysql://Full202086309:3306/stack";
+   static final String DB_URL = "jdbc:mysql://Full202086309:3306/DKarpiuk";
  
    static final String USER = "admin";
    static final String PASS = "admin";
  
    static Scanner in = new Scanner( System.in);
   
-     public static void main(String[] args) {
+   public static void main(String[] args) {
+   
    Connection conn = null;
    Statement stmt = null;
    try{
       Class.forName("com.mysql.jdbc.Driver");
- 
+      TimeUnit.SECONDS.sleep(10);
       System.out.println("Connecting to database...");
       conn = DriverManager.getConnection(DB_URL,USER,PASS);
- 
- 
       stmt = conn.createStatement();
       String sql;
+      sql = "CREATE TABLE IF NOT EXISTS Persons (PersonID int, LastName varchar(255), FirstName varchar(255), Address varchar(255), City varchar(255) );";
+      int cT = stmt.executeUpdate(sql);
       String optNr;
       int id;
       String idr;
