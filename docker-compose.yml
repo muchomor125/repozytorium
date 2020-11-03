@@ -1,0 +1,15 @@
+version: "3.7"
+ 
+services:
+ 
+ mysql:
+  image: mysql:latest
+  container_name: Full202086309
+  ports:
+   - "3306:3306"
+  networks:
+   front:
+    ipv4_address: 10.0.10.3
+  enviroment:
+	MYSQL_ROOT_PASSWORD: "pass123"
+	MYSQL_DATABASE: "DKarpiuk"  
