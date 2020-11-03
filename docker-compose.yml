@@ -4,12 +4,35 @@ services:
  
  mysql:
   image: mysql:latest
+  restart: always
   container_name: Full202086309
+  volumes:
+   - db_data:/var/lib/mysql
   ports:
    - "3306:3306"
   networks:
-   front:
-    ipv4_address: 10.0.10.3
-  enviroment:
-	MYSQL_ROOT_PASSWORD: "pass123"
-	MYSQL_DATABASE: "DKarpiuk"  
+   BridgeZad1A:
+    ipv4_address: 10.0.10.3 
+  environment:
+        MYSQL_ROOT_PASSWORD: "root"
+        MYSQL_DATABASE: "DKarpiuk"
+        MYSQL_USER: "admin"
+        MYSQL_PASSWORD: "admin"
+ java:
+  image: muchomor125/repozytorium:last
+  container_name: JavaContainer
+  depends_on:
+    - mysql
+  networks:
+   - BridgeZad1A
+  stdin_open: true
+ 
+networks:
+  BridgeZad1A:
+   driver: bridge
+   ipam:
+    config:
+     - subnet: 10.0.10.0/24
+
+volumes:
+ db_data: {}
