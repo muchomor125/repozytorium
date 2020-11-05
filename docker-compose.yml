@@ -19,13 +19,13 @@ services:
         MYSQL_USER: "admin"
         MYSQL_PASSWORD: "admin"
  java:
-  image: muchomor125/repozytorium:last
+  image: muchomor125/repozytorium:latest
+  stdin_open: true
   container_name: JavaContainer
   depends_on:
     - mysql
   networks:
    - BridgeZad1A
-  stdin_open: true
  
 networks:
   BridgeZad1A:
